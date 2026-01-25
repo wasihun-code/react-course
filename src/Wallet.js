@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { useQuery, useMutation } from '@tanstack/react-query';
 // Assume these mocks and imports exist
 import { useWallet, fetchBalance, stakeEth, formatEther } from './mocks';
@@ -85,3 +86,29 @@ export function StakingDashboard() {
     </div>
   );
 }
+=======
+import { useEffect } from "react";
+
+export const Navbar = (props) => {
+  const {address, blockNumber} = props;
+
+  useEffect(() => {
+    document.title = "Block" + blockNumber;
+
+    return () => {
+      document.title = "Waiting..."
+    }
+  }, [blockNumber])
+  return (<div>
+    <div>Block Number: {blockNumber} </div>
+    <p>Connected: {address}</p>
+    </div>
+  );
+}
+
+export const ConnectButton = (props) => {
+  const { setAddress } = props;
+  return <button onClick={() => setAddress('0x123')}>Connect</button>;
+}
+
+>>>>>>> d9ef1d6 (completed 5 phases)
