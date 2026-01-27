@@ -1,21 +1,38 @@
-import { useEffect } from "react";
+export function WalletFeed() {
 
-function Walletdisplay(props) {
-    if (props.balance === 0)
-        return {
-            type: 'div',
-            props: {
-                style: {color: 'gray' },
-                children: 'Connect Wallet',
-            },
-        }
-    return {
-        type: 'div',
-        props: {
-            style: {color: 'black' },
-            children: props.balance + ' ETH',
-        },
-    };
 }
 
-export default Walletdisplay;
+class ErrorBoundary extends React.Component {
+    constructor() {
+        super(props);
+        this.state = {hasError: false};
+    }
+
+    static getDerivedStateFromError(error) {
+        return {hasError: true}
+    }
+
+    componentDidCatch(error, errorInfo) {
+        console.error(error);
+    }
+
+    render() {
+        if (this.state.hasError) 
+            return this.props.fallback;
+        return this.props.children;
+    }
+}
+
+function Dashboard() {
+  return (
+    <div className="layout">
+      <Navbar />
+      <div className="content">
+            <ErrorBoundary fallback={<div>Feed Unavailable</div>}>
+                <WalletFeed />
+            </ErrorBoundary>
+        </div>
+        <Sidebar />
+    </div>
+  )
+}
