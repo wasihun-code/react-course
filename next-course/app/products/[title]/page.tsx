@@ -1,3 +1,4 @@
+import React from "react";
 import BuyButton from "./buy-button";
 
 
@@ -13,14 +14,16 @@ const getData = (id: string) => new Promise<DataProp>((resolve, _reject) => {
 })
     
 
-export default async function Page() {
+export default async function Page(): Promise<React.JSX.Element> {
     const data: DataProp  = await getData("monitor x");
     console.log(data);
 
-    return <div>
-        <h1>Name: {data.name}</h1>
-        <p>Price: {data.price}</p>
+    return (
+        <div>
+            <h1>Name: {data.name}</h1>
+            <p>Price: {data.price}</p>
 
-        <BuyButton price={data.price}/>
-    </div>
+            <BuyButton price={data.price}/>
+        </div>
+    )
 }
