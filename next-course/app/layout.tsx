@@ -23,9 +23,7 @@ export default function RootLayout({
         className={
           `
             ${roboto.className} 
-            antialiased bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 
-            text-lg sm:text-xl
-          `
+            antialiased bg-gray-50 text-lg sm:text-xl`
         }
       >
         {children}
