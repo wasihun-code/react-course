@@ -3,7 +3,6 @@
 
 import SubmitButton from './submit-button';
 import subscribeAction from './action';
-import { useFormState } from 'react-dom';
 import { useActionState } from 'react';
 
 const initialState = { error: '' };
