@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import GalleryPage from "../../gallery/page";
 import { Metadata } from "next";
 
@@ -6,7 +6,6 @@ import dynamic from "next/dynamic";
 
 const BuyButton = dynamic(() => import("./buy-button"), {
     loading: () => <p>Loading Buy Button...</p>,
-    ssr: 'false'
 });
 
 interface DataProp {
@@ -27,7 +26,8 @@ interface PageProps {
 }
 
 export async function generateMetadata({params}: PageProps): Promise<Metadata> {
-    const data: DataProp  = await getData(params.title);
+   const par = await params;
+   const data: DataProp  = await getData(par.title);
     console.log(data);
     return {
         title: data.name,
@@ -37,14 +37,18 @@ export async function generateMetadata({params}: PageProps): Promise<Metadata> {
     
 
 export default async function Page({params}: PageProps): Promise<React.JSX.Element> {
-    const data: DataProp  = await getData(params.title);
+   const par = await params;
+   const data: DataProp  = await getData(par.title);
 
     return (
         <div>
+
             <h1>Name: {data.name}</h1>
             <p>Price: {data.price}</p>
             <BuyButton price={data.price}/>
-            <GalleryPage />
+            <Suspense fallback={<p> Loading Gallery...</p>}>
+                <GalleryPage />
+            </Suspense>
         </div>
     )
 }

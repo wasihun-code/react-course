@@ -1,6 +1,7 @@
 import Image from "next/image";
 
-export default function GalleryPage() {
+export default async function GalleryPage() {
+    setTimeout(() => {console.log("Image component loaded")}, 10000);
     return (
         <Image 
             src="https://placehold.co/600x400"
@@ -9,6 +10,7 @@ export default function GalleryPage() {
             height={400}
             priority
             unoptimized
+            cache="no-store"
         />
     )
 }

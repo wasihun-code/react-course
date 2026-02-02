@@ -8,14 +8,7 @@ interface User {
 }
 const link: string = process.env.API_LINK || '';
 
-export default async function Page(): Promise<React.JSX.Element> {
-    // const res = await fetch(link, {
-    //     headers: {
-    //         'X-Api-Key': process.env.X_API_KEY || ''
-    //     },
-    //     next: { revalidate: 10 },
-
-    // });
+export default async function Page(){
 
     const userRequest1 = fetch(link, {
         cache: 'no-store', 
